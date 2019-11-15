@@ -1,17 +1,17 @@
 import re
 
 
-
 def labelAddr():
-    #label 
     label_addr = {}
     f2 = open("test.txt", "r")
     c = 0
     for line in f2:
         test1 = re.split(r"\s+", line,2)
-        if test1[0] != '':
-            # print(test1[0] +" " + str(c))
-            label_addr[test1[0]] = c 
+        if test1[0] != '' :
+            if test1[0] not in label_addr:
+                label_addr[test1[0]] = c 
+            else:
+                raise ValueError('Duplicate label >> ' + test1[0] )
         c+=1
     return label_addr
 
@@ -27,13 +27,13 @@ def gen_16twoCom(intNumber):
             result = '1'+bin(negate)[2:].zfill(15)
             return result
         else:
-            raise ValueError("Overflow Number")
+            raise ValueError("Overflow Number OffsetField")
     else:
         result = bin(intNumber)[2:].zfill(16)
         if intNumber < 32768:
             return result
         else:
-            raise ValueError("Overflow Number")
+            raise ValueError("Overflow Number OffsetField")
 
 def gen_32twoCom(intNumber):
     if intNumber < 0:
@@ -45,13 +45,13 @@ def gen_32twoCom(intNumber):
             result = '1'+bin(negate)[2:].zfill(31)
             return result
         else:
-            raise ValueError("Overflow Number")
+            raise ValueError("Overflow Number OffsetField")
     else:
         result = bin(intNumber)[2:].zfill(32)
         if intNumber < 2147483648:
             return result
         else:
-            raise ValueError("Overflow Number")
+            raise ValueError("Overflow Number OffsetField")
 #--------------------------------------------------------------------------------------
 
 #Type_Code 
@@ -94,6 +94,8 @@ def I_type_GenCode(line_split,PC):
     else:
         sym_addr = off
         intOffset = labelAddr()[sym_addr] - (PC+1)
+        if intOffset < -32768 or intOffset > 32767:
+            print('overflow reference address')
         if sym_addr in labelAddr():
             if inst == 'beq':
                 bi_offset+=gen_16twoCom(intOffset)
@@ -121,3 +123,40 @@ def O_type_GenCode(line_split):
         opcode+='111'
         
     return '0000000'+opcode+'0000000000000000000000'
+
+
+
+def sign_extend32(offset16):
+    if int(offset16,2) & (1<<15):
+        for n in range(0,16) :
+            offset16 = "1" + offset16
+    else:
+        for n in range(0,16) :
+            offset16 = "0" + offset16
+    
+    offset32 = offset16
+    return offset32
+
+def sign_extend(value, bits):
+    if len(value) <= bits :
+        x = list(value)
+        if x[0] == "0":
+            for n in range(bits - len(value)) :
+                value = "0" + value 
+        else:
+            for n in range(bits - len(value)) :
+                value = "1" + value 
+    return value
+
+
+
+
+def twoCom_ToInt(biNumber32):
+    if biNumber32[0] == '0':
+        return int(biNumber32,2)
+    else:
+        return int('-'+str(int(bin(4294967296-int(biNumber32,2))[2:].zfill(32),2)))
+
+
+        
+
