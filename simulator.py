@@ -32,13 +32,13 @@ def simulate(PC, reg, mem):
         elif opcode == '001': #nand
             AandB = int(gen_32twoCom(int(reg[A])), 2) & int(gen_32twoCom(int(reg[B])), 2)
             AnandB = int('11111111111111111111111111111111', 2) - AandB
-            reg[Des] = AnandB
+            reg[Des] = int(AnandB)
         elif opcode == "010": #lw
-            reg[B] = mem[int(reg[A])+offset]
+            reg[B] = int(mem[int(reg[A])+offset])
         elif opcode == '011': #sw
-            mem[reg[A]+offset] = int(reg[B])
+            mem[int(reg[A])+offset] = int(reg[B])
         elif opcode == '100': #beq
-            if reg[A] == reg[B]:
+            if int(reg[A]) == int(reg[B]):
                 PC = PC + 1 + offset
                 continue
         elif opcode == '101': #jalr

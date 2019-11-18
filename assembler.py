@@ -2,6 +2,8 @@
 
 from Type_Code import J_type_GenCode,I_type_GenCode,O_type_GenCode,R_type_GenCode,labelAddr
 
+
+
 def Assembler(lineSplit,mem,PC):
         if lineSplit[1] == 'add' or lineSplit[1] == 'nand'  : 
             # print(lineSplit)

@@ -5,7 +5,7 @@ from assembler import Assembler
 from simulator import simulate
 
 
-filetext = open("test.txt","r")
+filetext = open("combination.txt","r")
 
 line_arr = []
 for line in filetext :

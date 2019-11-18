@@ -1,9 +1,8 @@
 import re
 
-
 def labelAddr():
     label_addr = {}
-    f2 = open("test.txt", "r")
+    f2 = open("combination.txt", "r")
     c = 0
     for line in f2:
         test1 = re.split(r"\s+", line,2)
@@ -14,6 +13,9 @@ def labelAddr():
                 raise ValueError('Duplicate label >> ' + test1[0] )
         c+=1
     return label_addr
+
+label_addr = labelAddr() # create labels - address
+print(label_addr)
 
 #GenCode 
 #-------------------------------------------------------------------------------------
@@ -48,7 +50,7 @@ def gen_32twoCom(intNumber):
             raise ValueError("Overflow Number OffsetField")
     else:
         result = bin(intNumber)[2:].zfill(32)
-        if intNumber < 2147483648:
+        if intNumber < 2147483648 :
             return result
         else:
             raise ValueError("Overflow Number OffsetField")
