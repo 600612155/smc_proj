@@ -5,7 +5,7 @@ from assembler import Assembler
 from simulator import simulate
 
 
-filetext = open("combination.txt","r")
+filetext = open("multiplication.txt","r")
 
 line_arr = []
 for line in filetext :
@@ -19,7 +19,7 @@ for i in range(0,8):
     reg.append(0)
 
 
-# print(sign_extend32(gen_16twoCom(7)))
+
 
         
 

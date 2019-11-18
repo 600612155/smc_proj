@@ -2,7 +2,7 @@ import re
 
 def labelAddr():
     label_addr = {}
-    f2 = open("combination.txt", "r")
+    f2 = open("multiplication.txt", "r")
     c = 0
     for line in f2:
         test1 = re.split(r"\s+", line,2)
@@ -15,7 +15,6 @@ def labelAddr():
     return label_addr
 
 label_addr = labelAddr() # create labels - address
-print(label_addr)
 
 #GenCode 
 #-------------------------------------------------------------------------------------
