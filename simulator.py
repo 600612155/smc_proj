@@ -1,8 +1,7 @@
 import re
-from Type_Code import J_type_GenCode, I_type_GenCode, O_type_GenCode, R_type_GenCode, labelAddr, gen_16twoCom, gen_32twoCom, sign_extend32,twoCom_ToInt
+from Type_Code import J_type_GenCode, I_type_GenCode, O_type_GenCode, R_type_GenCode, gen_16twoCom, gen_32twoCom, sign_extend32,twoCom_ToInt
 from assembler import Assembler
 from printState import printState
-
 
 def simulate(PC, reg, mem):
     count = 1
@@ -34,6 +33,7 @@ def simulate(PC, reg, mem):
             AnandB = int('11111111111111111111111111111111', 2) - AandB
             reg[Des] = int(AnandB)
         elif opcode == "010": #lw
+            print(int(mem[int(reg[A])+offset]))
             reg[B] = int(mem[int(reg[A])+offset])
         elif opcode == '011': #sw
             mem[int(reg[A])+offset] = int(reg[B])
@@ -45,10 +45,12 @@ def simulate(PC, reg, mem):
             if A == B:
                 reg[B] = PC + 1
                 PC = PC + 1
+                reg[0] = 0
                 continue
             else:
                 reg[B] = PC + 1
                 PC = reg[A]
+                reg[0] = 0
                 continue 
         elif opcode == '111': #noop
             pass

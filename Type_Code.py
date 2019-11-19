@@ -1,8 +1,9 @@
 import re
 
-def labelAddr():
+
+def labelAddr(fileName):
     label_addr = {}
-    f2 = open("multiplication.txt", "r")
+    f2 = open(fileName, "r")
     c = 0
     for line in f2:
         test1 = re.split(r"\s+", line,2)
@@ -14,7 +15,6 @@ def labelAddr():
         c+=1
     return label_addr
 
-label_addr = labelAddr() # create labels - address
 
 #GenCode 
 #-------------------------------------------------------------------------------------
@@ -72,7 +72,9 @@ def R_type_GenCode(line_split):
     machineCodeInst = '0000000'+opcode+bi_regA+bi_regB+'0000000000000'+bi_regDes
     return machineCodeInst
 
-def I_type_GenCode(line_split,PC):
+
+
+def I_type_GenCode(line_split,PC,label_addr):
     inst = line_split[1]
     regA = line_split[2]
     regB = line_split[3]
@@ -94,14 +96,14 @@ def I_type_GenCode(line_split,PC):
         bi_offset+=gen_16twoCom(int(off))
     else:
         sym_addr = off
-        intOffset = labelAddr()[sym_addr] - (PC+1)
+        intOffset = label_addr[sym_addr] - (PC+1)
         if intOffset < -32768 or intOffset > 32767:
             print('overflow reference address')
-        if sym_addr in labelAddr():
+        if sym_addr in label_addr:
             if inst == 'beq':
                 bi_offset+=gen_16twoCom(intOffset)
             else:
-                bi_offset+=bin(int(labelAddr()[sym_addr]))[2:].zfill(16)
+                bi_offset+=bin(int(label_addr[sym_addr]))[2:].zfill(16)
     I_code = '0000000' + opcode + bi_regA + bi_regB + bi_offset
     
     return I_code
