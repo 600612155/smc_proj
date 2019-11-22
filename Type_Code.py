@@ -28,13 +28,15 @@ def gen_16twoCom(intNumber):
             result = '1'+bin(negate)[2:].zfill(15)
             return result
         else:
-            raise ValueError("Overflow Number OffsetField")
+            print("Overflow Number OffsetField")
+            exit(1)
     else:
         result = bin(intNumber)[2:].zfill(16)
         if intNumber < 32768:
             return result
         else:
-            raise ValueError("Overflow Number OffsetField")
+            print("Overflow Number OffsetField")
+            exit(1)
 
 def gen_32twoCom(intNumber):
     if intNumber < 0:
@@ -46,13 +48,15 @@ def gen_32twoCom(intNumber):
             result = '1'+bin(negate)[2:].zfill(31)
             return result
         else:
-            raise ValueError("Overflow Number OffsetField")
+            print("Overflow Number OffsetField")
+            exit(1)
     else:
         result = bin(intNumber)[2:].zfill(32)
         if intNumber < 2147483648 :
             return result
         else:
-            raise ValueError("Overflow Number OffsetField")
+            print("Overflow Number OffsetField")
+            exit(1)
 #--------------------------------------------------------------------------------------
 
 #Type_Code 
@@ -90,8 +94,7 @@ def I_type_GenCode(line_split,PC,label_addr):
         opcode+='011'
     elif inst == 'beq':
         opcode+='100'
-    else:
-        raise ValueError("Invalid instruction")
+    
     if off.lstrip('-').isdigit() :
         bi_offset+=gen_16twoCom(int(off))
     else:

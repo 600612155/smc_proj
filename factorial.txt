@@ -21,7 +21,7 @@ L3 add 0 3 1 store return value in reg1 and add new input to reg1 for next proce
  jalr 6 0 repeat process
 L4 lw 0 1 pos1 for baseCase  
 done halt
-number .fill 15
+number .fill 2
 neg1 .fill -1
 pos1 .fill 1
 zero .fill 0

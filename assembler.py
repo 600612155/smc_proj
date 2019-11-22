@@ -1,4 +1,4 @@
-from Type_Code import J_type_GenCode,I_type_GenCode,O_type_GenCode,R_type_GenCode
+from Type_Code import J_type_GenCode,I_type_GenCode,O_type_GenCode,R_type_GenCode,gen_32twoCom
 
 def Assembler(lineSplit,mem,PC,label_addr):                                  
         if lineSplit[1] == 'add' or lineSplit[1] == 'nand'  :                          #เช็คตาม Type 
@@ -16,4 +16,6 @@ def Assembler(lineSplit,mem,PC,label_addr):
             else:                                     
                 mem[PC] = int(label_addr[lineSplit[2]])                        #ถ้าเป็น (symbolic address)string เอาไปเช็คกับ (int)label_addr ที่ map ไว้
         else:
-            raise ValueError("Invalid instruction")
+            print("Invalid instruction >> label " + str(PC+1) )
+            exit(1)
+

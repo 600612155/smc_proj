@@ -3,7 +3,7 @@ from Type_Code import J_type_GenCode,I_type_GenCode,O_type_GenCode,R_type_GenCod
 from assembler import Assembler
 from simulator import simulate
 
-fileName = "test.txt"                          #อ่านไฟล์ Assembly.txt เข้ามา
+fileName = "factorial.txt"                          #อ่านไฟล์ Assembly.txt เข้ามา
 filetext = open(fileName,"r")
 #--------------------------------------------
 label_addr = labelAddr(fileName)               #create labels ไป Type_Code.py 
@@ -30,6 +30,11 @@ while PC < len(line_arr):                           #วนจนกว่าจ
 #--------------------------------------------- 
     
 for i in range(0,len(mem)):
-    print('memory['+str(i)+']='+str(mem[i]))
+    print('memory['+str(i)+']='+str(  mem[i]))
 startPC = 0
 simulate(startPC,reg,mem)
+exit(0)
+
+
+
+
