@@ -5,7 +5,7 @@
 L1 lw 0 4 limit (load 15 to reg4) 
  beq 3 4 done (if testBitMp = 15 round endProgram )
  nand 2 3 4 (nand mp with testBitMp store result in reg4 )
- beq 5 4 L2 (if nand result == 4294967295 means mplier bit is zero then goto L2(no addition)   )
+ beq 5 4 L2 (if nand result == -1 means mplier bit is zero then goto L2(no addition)   )
  add 1 7 1 (add mcand to reg7 >> result in reg1)
 L2 add 7 7 7 (shift mcand left 1 bit)
  add 3 3 3 (shift testBitMp left 1 bit)
