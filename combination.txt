@@ -1,4 +1,4 @@
-                lw 0 1 n input n
+ lw 0 1 n input n
  lw 0 2 r input r
  lw 0 6 l1 
  jalr 6 7 first caller
